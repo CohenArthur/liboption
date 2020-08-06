@@ -19,7 +19,7 @@ enum opt_type {
  */
 #define OPT_DECLARE(Name, Type)                                            \
     struct Name##_some {                                                   \
-        Type data;                                                         \
+        Type value;                                                        \
     };                                                                     \
                                                                            \
     /**                                                                    \
@@ -63,7 +63,7 @@ enum opt_type {
     struct Name Name##_some(Type value) {                                    \
         struct Name opt = {                                                  \
             .type = SOME,                                                    \
-            .value.data = value,                                             \
+            .some.value = value,                                             \
         };                                                                   \
                                                                              \
         return opt;                                                          \
@@ -71,7 +71,7 @@ enum opt_type {
                                                                              \
     struct Name Name##_none() {                                              \
         struct Name opt = {                                                  \
-            .type = NONE, /* value.data stays uninitialized but we won't     \
+            .type = NONE, /* some.value stays uninitialized but we won't     \
                              access it */                                    \
         };                                                                   \
                                                                              \
@@ -86,5 +86,5 @@ enum opt_type {
         if (opt->type == NONE)                                               \
             errx(1, "%s", "trying to access value on `None` option_" #Name); \
                                                                              \
-        return opt->value.some.value;                                        \
+        return opt->some.value;                                              \
     }
