@@ -20,7 +20,7 @@ OPT_DECLARE(my_struct_opt, struct my_struct);
 ```
 
 * in your source file:
-```
+```c
 #include "option.h"
 
 OPT_DEFINE(my_struct_opt, struct my_struct);
