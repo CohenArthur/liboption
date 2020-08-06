@@ -16,7 +16,7 @@
  * `Some` struct. It contains the held value
  */
 struct opt_some {
-    void *value;
+    OPT_TYPE value;
 };
 
 /**
@@ -28,13 +28,13 @@ struct opt_none {};
  * Basic option struct, similar to Maybe in Haskell or Option in Rust
  */
 struct option {
-    // What is contained in the Union
+    /* What is contained in the Union */
     enum opt_type {
         NONE = 0,
         SOME,
     } type;
 
-    // The contained (or not) value
+    /* The contained (or not) value */
     union {
         struct opt_some some;
         struct opt_none none;

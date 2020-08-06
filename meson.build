@@ -7,9 +7,11 @@ project('option', ['c', 'cpp'],
   ])
 
 src = [
+  'src/option.c',
 ]
 
 tests = [
+  'test_option.cpp',
 ]
 
 option_so = library('option', src)
