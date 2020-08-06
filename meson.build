@@ -1,4 +1,4 @@
-project('option', ['c', 'cpp'],
+project('option', 'c',
   default_options: [
   'warnlevel=3',
   'debug=true',
@@ -7,23 +7,21 @@ project('option', ['c', 'cpp'],
   ])
 
 src = [
-  'src/option.c',
 ]
 
 tests = [
-  'test_option.cpp',
+  'test_option.c',
 ]
 
 option_so = library('option', src)
 
-gtest_dep = dependency('gtest')
 option_dep = declare_dependency(link_with: option_so)
 
 foreach test_src: tests
   bin = executable('bin' + test_src, 'tests/' + test_src,
     dependencies: [
-      option_dep,
-      gtest_dep])
+      option_dep]
+      )
   test('bin' + test_src, bin, args: [
     '--gtest_color=yes',
     ])
