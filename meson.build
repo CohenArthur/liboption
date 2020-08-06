@@ -1,6 +1,6 @@
 project('option', 'c',
   default_options: [
-  'warnlevel=3',
+  'warning_level=3',
   'debug=true',
   'c_std=c11',
   'b_sanitize=address',
