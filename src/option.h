@@ -5,7 +5,7 @@
 #include <stdlib.h>
 
 /**
- * The different types of possible options
+ * The different types of options
  */
 enum opt_type {
     NONE = 0,
