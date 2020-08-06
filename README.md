@@ -1,4 +1,4 @@
-# option
+# liboption
 
 "Generic" option Type in C
 
