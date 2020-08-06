@@ -37,6 +37,9 @@ functions. Those are:
 |`<name>_is_some`|
 |`<name>_is_none`|
 
+The file `tests/test_option.c` defines two opt types, `option_not_int` and `opt_ull` and
+uses them.
+
 # Limitations
 
 The option type adds 8 bytes to your return values but ensures better error handling

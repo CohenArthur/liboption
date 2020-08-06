@@ -10,6 +10,9 @@
 OPT_DECLARE(option_not_int, int);
 OPT_DEFINE(option_not_int, int);
 
+OPT_DECLARE(opt_ull, unsigned long long);
+OPT_DEFINE(opt_ull, unsigned long long);
+
 TEST(opt, init_none)
 {
     struct option_not_int opt = option_not_int_none();
@@ -37,6 +40,27 @@ TEST(opt, get_on_none)
     struct option_not_int opt = option_not_int_none();
 
     ASSERT_EQ(12, option_not_int_get(&opt));
+}
+
+TEST(opt_ull, init_none)
+{
+    struct opt_ull opt = opt_ull_none();
+
+    ASSERT_TRUE(opt_ull_is_none(&opt));
+}
+
+TEST(opt_ull, init_some)
+{
+    struct opt_ull opt = opt_ull_some(23);
+
+    ASSERT_TRUE(opt_ull_is_some(&opt));
+}
+
+TEST(opt_ull, get_on_some)
+{
+    struct opt_ull opt = opt_ull_some(23);
+
+    ASSERT_EQ(23, opt_ull_get(&opt));
 }
 
 int main(void)
