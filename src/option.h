@@ -23,23 +23,23 @@ enum opt_type {
 /**
  * Declare an option of the given type. The associated functions will be named
  * opt_<name>_get(), opt_<name>_is_none(), etc.
- * The resulting struct is named struct option_<name>
+ * The resulting struct is named struct <name>
  */
 #define OPT_DECLARE(Name, Type)                                            \
-    struct opt_##Name##_some {                                             \
+    struct Name##_some {                                             \
         Type value;                                                        \
     };                                                                     \
                                                                            \
     /**                                                                    \
      * Basic option struct, similar to Maybe in Haskell or Option in Rust  \
      */                                                                    \
-    struct option_##Name {                                                 \
+    struct Name {                                                 \
         /* What is contained in the Union */                               \
         enum opt_type type;                                                \
                                                                            \
         /* The contained (or not) value */                                 \
         union {                                                            \
-            struct opt_##Name##_some some;                                 \
+            struct Name##_some some;                                 \
             struct opt_none none;                                          \
         } value;                                                           \
     };                                                                     \
@@ -47,32 +47,32 @@ enum opt_type {
     /**                                                                    \
      * Create a new `Some` option and return it                            \
      */                                                                    \
-    struct option_##Name opt_##Name##_some(Type value);                    \
+    struct Name Name##_some(Type value);                    \
                                                                            \
     /**                                                                    \
      * Create a new `None` option and return it                            \
      */                                                                    \
-    struct option_##Name opt_##Name##_none();                              \
+    struct Name Name##_none();                              \
                                                                            \
     /**                                                                    \
      * Does the option contain something                                   \
      */                                                                    \
-    bool opt_##Name##_is_some(struct option_##Name *opt);                  \
+    bool Name##_is_some(struct Name *opt);                  \
                                                                            \
     /**                                                                    \
      * Does the option contain nothing                                     \
      */                                                                    \
-    bool opt_##Name##_is_none(struct option_##Name *opt);                  \
+    bool Name##_is_none(struct Name *opt);                  \
                                                                            \
     /**                                                                    \
      * Returns the value contained in the option. If the option is `None`, \
      * exits the program                                                   \
      */                                                                    \
-    Type opt_##Name##_get(struct option_##Name *opt)
+    Type Name##_get(struct Name *opt)
 
 #define OPT_DEFINE(Name, Type)                                               \
-    struct option_##Name opt_##Name##_some(Type value) {                     \
-        struct option_##Name opt = {                                         \
+    struct Name Name##_some(Type value) {                     \
+        struct Name opt = {                                         \
             .type = SOME,                                                    \
             .value.some.value = value,                                       \
         };                                                                   \
@@ -80,8 +80,8 @@ enum opt_type {
         return opt;                                                          \
     }                                                                        \
                                                                              \
-    struct option_##Name opt_##Name##_none() {                               \
-        struct option_##Name opt = {                                         \
+    struct Name Name##_none() {                               \
+        struct Name opt = {                                         \
             .type = NONE,                                                    \
             .value.none.phantom_field = 0,                                   \
         };                                                                   \
@@ -89,15 +89,15 @@ enum opt_type {
         return opt;                                                          \
     }                                                                        \
                                                                              \
-    bool opt_##Name##_is_some(struct option_##Name *opt) {                   \
+    bool Name##_is_some(struct Name *opt) {                   \
         return opt->type == SOME;                                            \
     }                                                                        \
                                                                              \
-    bool opt_##Name##_is_none(struct option_##Name *opt) {                   \
+    bool Name##_is_none(struct Name *opt) {                   \
         return opt->type == NONE;                                            \
     }                                                                        \
                                                                              \
-    Type opt_##Name##_get(struct option_##Name *opt) {                       \
+    Type Name##_get(struct Name *opt) {                       \
         if (opt->type == NONE)                                               \
             errx(1, "%s", "trying to access value on `None` option_" #Name); \
                                                                              \
