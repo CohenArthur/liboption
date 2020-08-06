@@ -9,13 +9,13 @@
 #define ASSERT_EQ(Lhs, Rhs) assert(Lhs == Rhs)
 
 OPT_DECLARE(option_not_int, int);
-OPT_DEFINE(option_not_int, int);
+OPT_DEFINE(option_not_int, int)
 
 OPT_DECLARE(opt_ull, unsigned long long);
-OPT_DEFINE(opt_ull, unsigned long long);
+OPT_DEFINE(opt_ull, unsigned long long)
 
 OPT_DECLARE(opt_string, char *);
-OPT_DEFINE(opt_string, char *);
+OPT_DEFINE(opt_string, char *)
 
 TEST(opt, init_none)
 {
