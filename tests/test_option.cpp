@@ -23,7 +23,7 @@ TEST(opt, init_some)
     opt_destroy(opt);
 }
 
-TEST(opt, init_get_on_some)
+TEST(opt, get_on_some)
 {
     struct option *opt = opt_some(23);
 
@@ -31,6 +31,18 @@ TEST(opt, init_get_on_some)
 
     opt_destroy(opt);
 }
+
+/*
+// Commented out or else tests will fail
+TEST(opt, get_on_none)
+{
+    struct option *opt = opt_none();
+
+    ASSERT_EQ(12, opt_get(opt));
+
+    opt_destroy(opt);
+}
+*/
 
 int main(int argc, char **argv)
 {
