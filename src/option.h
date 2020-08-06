@@ -7,6 +7,7 @@
 /**
  * `None` struct. In the C standard, a struct cannot be empty. Therefore, this
  * None struct contains only one bit.
+ * An empty struct is possible when using a GNU extension.
  */
 struct opt_none {
     char phantom_field : 1;
