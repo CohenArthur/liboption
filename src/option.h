@@ -23,15 +23,9 @@ enum opt_type {
     };                                                                     \
                                                                            \
     /**                                                                    \
-     * Basic option struct, similar to Maybe in Haskell or Option in Rust  \
+     * Forward definition                                                  \
      */                                                                    \
-    struct Name {                                                          \
-        /* What is contained in the Union */                               \
-        enum opt_type type;                                                \
-                                                                           \
-        /* The contained (or not) value */                                 \
-        struct Name##_some some;                                           \
-    };                                                                     \
+    struct Name;                                                           \
                                                                            \
     /**                                                                    \
      * Create a new `Some` option and return it                            \
@@ -60,6 +54,17 @@ enum opt_type {
     Type Name##_get(struct Name *opt)
 
 #define OPT_DEFINE(Name, Type)                                               \
+    /**                                                                      \
+     * Basic option struct, similar to Maybe in Haskell or Option in Rust    \
+     */                                                                      \
+    struct Name {                                                            \
+        /* What is contained in the Union */                                 \
+        enum opt_type type;                                                  \
+                                                                             \
+        /* The contained (or not) value */                                   \
+        struct Name##_some some;                                             \
+    };                                                                       \
+                                                                             \
     struct Name Name##_some(Type value) {                                    \
         struct Name opt = {                                                  \
             .type = SOME,                                                    \
