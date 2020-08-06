@@ -5,15 +5,6 @@
 #include <stdlib.h>
 
 /**
- * `None` struct. In the C standard, a struct cannot be empty. Therefore, this
- * None struct contains only one bit.
- * An empty struct is possible when using a GNU extension.
- */
-struct opt_none {
-    char phantom_field : 1;
-};
-
-/**
  * The different types of possible options
  */
 enum opt_type {
@@ -28,7 +19,7 @@ enum opt_type {
  */
 #define OPT_DECLARE(Name, Type)                                            \
     struct Name##_some {                                                   \
-        Type value;                                                        \
+        Type data;                                                         \
     };                                                                     \
                                                                            \
     /**                                                                    \
@@ -39,10 +30,7 @@ enum opt_type {
         enum opt_type type;                                                \
                                                                            \
         /* The contained (or not) value */                                 \
-        union {                                                            \
-            struct Name##_some some;                                       \
-            struct opt_none none;                                          \
-        } value;                                                           \
+        struct Name##_some some;                                           \
     };                                                                     \
                                                                            \
     /**                                                                    \
@@ -75,7 +63,7 @@ enum opt_type {
     struct Name Name##_some(Type value) {                                    \
         struct Name opt = {                                                  \
             .type = SOME,                                                    \
-            .value.some.value = value,                                       \
+            .value.data = value,                                             \
         };                                                                   \
                                                                              \
         return opt;                                                          \
@@ -83,8 +71,8 @@ enum opt_type {
                                                                              \
     struct Name Name##_none() {                                              \
         struct Name opt = {                                                  \
-            .type = NONE,                                                    \
-            .value.none.phantom_field = 0,                                   \
+            .type = NONE, /* value.data stays uninitialized but we won't     \
+                             access it */                                    \
         };                                                                   \
                                                                              \
         return opt;                                                          \
