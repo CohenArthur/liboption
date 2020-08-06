@@ -14,7 +14,7 @@ struct my_struct {
     size_t size;
     size_t capacity;
     char buffer[];
-}
+};
 
 OPT_DECLARE(my_struct_opt, struct my_struct);
 ```
@@ -29,7 +29,7 @@ OPT_DEFINE(my_struct_opt, struct my_struct);
 This will declare and define a `struct my_struct_opt` type, as well as the associated
 functions. Those are:
 
-|name|
+|function's name|
 |---|
 |`<name>_some`|
 |`<name>_none`|
@@ -37,8 +37,8 @@ functions. Those are:
 |`<name>_is_some`|
 |`<name>_is_none`|
 
-The file `tests/test_option.c` defines two opt types, `option_not_int` and `opt_ull` and
-uses them.
+The file `tests/test_option.c` defines three opt types, `option_not_int`, `opt_ull` and
+`opt_string`.
 
 # Limitations
 
