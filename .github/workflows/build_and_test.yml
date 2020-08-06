@@ -10,6 +10,7 @@ jobs:
     - uses: actions/checkout@v2
     - name: Build liboption
       run: |
+          apt-get install meson ninja
           meson build
           cd build
           ninja
