@@ -42,7 +42,7 @@ The file `tests/test_option.c` defines three opt types, `option_not_int`, `opt_u
 
 # Limitations
 
-The option type adds 8 bytes to your return values but ensures better error handling
+* The option type adds 8 bytes to your return values but ensures better error handling
 and safety.
-This library does NOT work in C++. C++ does not support named initialization, on top
+* This library does NOT work in C++. C++ does not support named initialization, on top
 of being very dumb when it comes to macros sometimes.
