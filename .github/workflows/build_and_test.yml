@@ -18,6 +18,8 @@ jobs:
 
   tests:
     runs-on: ubuntu-latest
+    container:
+      image: alexisehret/archlinux_c_meson
     needs: build
 
     steps:
