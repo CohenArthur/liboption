@@ -5,12 +5,13 @@ on: pull_request
 jobs:
   build:
     runs-on: ubuntu-latest
+    container:
+      image: alexisehret/archlinux_c_meson
 
     steps:
     - uses: actions/checkout@v2
     - name: Build liboption
       run: |
-          apt-get install meson ninja
           meson build
           cd build
           ninja
